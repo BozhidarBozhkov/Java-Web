@@ -1,26 +1,26 @@
 package bg.softuni.mobilele.domain.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import bg.softuni.mobilele.domain.enums.Role;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
-@Table(name = "user_roles")
+@Table(name = "roles")
 public class UserRole extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private Role name;
 
     public UserRole() {
     }
 
-    public UserRole getRole() {
-        return role;
+    public Role getRole() {
+        return name;
     }
 
-    public UserRole setRole(UserRole role) {
-        this.role = role;
+    public UserRole setRole(Role name) {
+        this.name = name;
         return this;
     }
 }

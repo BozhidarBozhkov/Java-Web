@@ -8,10 +8,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "models")
+@Table(name = "offers")
 public class Offer extends BaseEntity{
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(EnumType.STRING)
