@@ -1,10 +1,11 @@
 package bg.softuni.mobilele.domain.entities;
 
-import bg.softuni.mobilele.domain.enums.Role;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -25,8 +26,8 @@ public class User extends BaseEntity{
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @OneToMany
-    private List<UserRole> role;
+    @OneToOne
+    private UserRole role;
 
     @Column(name = "image_url")
     private String imageUrl;
@@ -85,11 +86,11 @@ public class User extends BaseEntity{
         return this;
     }
 
-    public List<UserRole> getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public User setRole(List<UserRole> role) {
+    public User setRole(UserRole role) {
         this.role = role;
         return this;
     }

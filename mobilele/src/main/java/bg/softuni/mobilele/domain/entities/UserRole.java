@@ -1,9 +1,10 @@
 package bg.softuni.mobilele.domain.entities;
 
 import bg.softuni.mobilele.domain.enums.Role;
-import jakarta.persistence.*;
-
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "roles")
