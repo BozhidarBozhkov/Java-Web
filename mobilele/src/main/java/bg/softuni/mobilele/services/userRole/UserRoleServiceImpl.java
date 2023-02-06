@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserRoleServiceImpl implements UserRoleService, DataInitializerService {
+public class UserRoleServiceImpl implements UserRoleService {
 
     private final UserRoleRepository userRoleRepository;
     private final ModelMapper modelMapper;
@@ -23,17 +23,21 @@ public class UserRoleServiceImpl implements UserRoleService, DataInitializerServ
     public UserRoleServiceImpl(UserRoleRepository userRoleRepository, ModelMapper modelMapper) {
         this.userRoleRepository = userRoleRepository;
         this.modelMapper = modelMapper;
+        this.dbInit();
     }
 
 
     @Override
     public void dbInit() {
-        List<UserRole> roles = new ArrayList<>();
+        if (!isDBInit()) {
+            List<UserRole> roles = new ArrayList<>();
 
-        roles.add(new UserRole().setRole(Role.USER));
-        roles.add(new UserRole().setRole(Role.ADMIN));
+            roles.add(new UserRole().setRole(Role.USER));
+            roles.add(new UserRole().setRole(Role.ADMIN));
 
-        this.userRoleRepository.saveAllAndFlush(roles);
+            this.userRoleRepository.saveAllAndFlush(roles);
+        }
+
     }
 
     @Override

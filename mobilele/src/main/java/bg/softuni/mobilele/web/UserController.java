@@ -1,5 +1,6 @@
 package bg.softuni.mobilele.web;
 
+import bg.softuni.mobilele.domain.dto.binding.UserRegisterFormDto;
 import bg.softuni.mobilele.domain.dto.view.UserRoleViewDto;
 import bg.softuni.mobilele.services.userRole.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class UserController extends BaseController{
     }
 
     @PostMapping("/register")
-    public ModelAndView postRegister() {
+    public ModelAndView postRegister(UserRegisterFormDto userRegister) {
         return super.redirect("auth-login");
     }
 }
