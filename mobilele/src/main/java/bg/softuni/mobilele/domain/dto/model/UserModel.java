@@ -108,4 +108,8 @@ public class UserModel {
         this.modified = modified;
         return this;
     }
+
+    public boolean isValid() {
+        return this.id != null;
+    }
 }

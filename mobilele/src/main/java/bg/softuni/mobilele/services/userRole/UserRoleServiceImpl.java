@@ -54,15 +54,16 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     public List<UserRoleModel> findAllRoles() {
-        return this.userRoleRepository.findAll().stream()
-                .map(role -> this.modelMapper.map(role, UserRoleModel.class))
+        return this.userRoleRepository.findAll()
+                .stream()
+                .map(r -> this.modelMapper.map(r, UserRoleModel.class))
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public UserRoleModel findRoleByName(String name) {
-        return this.modelMapper.map(this.userRoleRepository.findRoleByName(Role.valueOf(name))
-                .orElseThrow(NoSuchElementException::new), UserRoleModel.class);
+        return this.modelMapper.map(this.userRoleRepository.findByRole(Role.valueOf(name))
+                        .orElseThrow(NoSuchElementException::new),
+                UserRoleModel.class);
     }
 }

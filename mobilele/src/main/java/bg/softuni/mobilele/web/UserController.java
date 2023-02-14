@@ -1,6 +1,8 @@
 package bg.softuni.mobilele.web;
 
+import bg.softuni.mobilele.domain.dto.binding.UserLoginFormDto;
 import bg.softuni.mobilele.domain.dto.binding.UserRegisterFormDto;
+import bg.softuni.mobilele.domain.dto.model.UserModel;
 import bg.softuni.mobilele.domain.dto.view.UserRoleViewDto;
 import bg.softuni.mobilele.services.user.UserService;
 import bg.softuni.mobilele.services.userRole.UserRoleService;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/users")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
     private final UserRoleService userRoleService;
     private final UserService userService;
 
@@ -35,6 +37,25 @@ public class UserController extends BaseController{
     @PostMapping("/register")
     public ModelAndView postRegister(UserRegisterFormDto userRegisterInfo) {
         this.userService.registerUser(userRegisterInfo);
-        return super.redirect("auth-login");
+        return super.redirect("login");
+    }
+
+    @GetMapping("/login")
+    public ModelAndView getLogin() {
+        return super.view("auth-login");
+    }
+
+    @PostMapping("/login")
+    public ModelAndView postLogin(UserLoginFormDto userLoginForm) {
+        UserModel userModel = this.userService.loginUser(userLoginForm);
+
+        return userModel.isValid() ? super.redirect("/") : super.redirect("/login");
+
+    }
+
+    @PostMapping("logout")
+    public ModelAndView postLogout() {
+        this.userService.logout();
+        return  super.redirect("/");
     }
 }
