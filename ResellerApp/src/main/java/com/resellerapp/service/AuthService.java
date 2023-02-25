@@ -1,20 +1,23 @@
 package com.resellerapp.service;
 
+import com.resellerapp.model.dto.LoginDTO;
 import com.resellerapp.model.dto.UserRegistrationDTO;
 import com.resellerapp.model.entity.User;
 import com.resellerapp.repository.UserRepository;
+import com.resellerapp.util.LoggedUser;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final LoggedUser loggedUser;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, LoggedUser loggedUser) {
         this.userRepository = userRepository;
+        this.loggedUser = loggedUser;
     }
 
     public boolean register(UserRegistrationDTO registrationDTO) {
@@ -40,5 +43,16 @@ public class AuthService {
         this.userRepository.save(user);
         return true;
 
+    }
+
+    public boolean login(LoginDTO loginDTO) {
+        Optional<User> user = this.userRepository.findByUsernameAndPassword(loginDTO.getUsername(), loginDTO.getPassword());
+
+        if (user.isEmpty()) {
+            return false;
+        }
+
+        this.loggedUser.login(user.get());
+        return true;
     }
 }
