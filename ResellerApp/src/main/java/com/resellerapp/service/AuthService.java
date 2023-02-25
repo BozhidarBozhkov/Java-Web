@@ -54,5 +54,11 @@ public class AuthService {
 
         this.loggedUser.login(user.get());
         return true;
+
+
+    }
+
+    public void logout(){
+        this.loggedUser.logout();
     }
 }

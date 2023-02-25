@@ -49,4 +49,9 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/")
+    public String loggedOutIndex() {
+        return "index";
+    }
+
 }

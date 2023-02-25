@@ -33,4 +33,9 @@ public class LoggedUser {
         this.username = username;
         return this;
     }
+
+    public void logout() {
+        this.id = null;
+        this.username = null;
+    }
 }
