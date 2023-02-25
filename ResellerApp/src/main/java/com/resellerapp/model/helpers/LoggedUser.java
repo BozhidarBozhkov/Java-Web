@@ -1,4 +1,4 @@
-package com.resellerapp.util;
+package com.resellerapp.model.helpers;
 
 import com.resellerapp.model.entity.User;
 import org.springframework.stereotype.Component;

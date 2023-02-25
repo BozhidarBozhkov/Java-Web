@@ -49,8 +49,9 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/")
+    @GetMapping("/logout")
     public String loggedOutIndex() {
+        this.authService.logout();
         return "index";
     }
 

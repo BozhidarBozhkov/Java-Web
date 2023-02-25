@@ -4,7 +4,7 @@ import com.resellerapp.model.dto.LoginDTO;
 import com.resellerapp.model.dto.UserRegistrationDTO;
 import com.resellerapp.model.entity.User;
 import com.resellerapp.repository.UserRepository;
-import com.resellerapp.util.LoggedUser;
+import com.resellerapp.model.helpers.LoggedUser;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
