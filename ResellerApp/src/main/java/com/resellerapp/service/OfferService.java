@@ -1,6 +1,7 @@
 package com.resellerapp.service;
 
 import com.resellerapp.model.dto.AddOfferDTO;
+import com.resellerapp.model.dto.BoughtItemsDTO;
 import com.resellerapp.model.dto.OtherUserOfferDto;
 import com.resellerapp.model.dto.UserWithOfferDTO;
 import com.resellerapp.model.entity.Condition;
@@ -58,4 +59,17 @@ public class OfferService {
         return this.offerRepository.findAllByOwnerIdNot(loggedUser.getId())
                 .stream().map(OtherUserOfferDto::new).collect(Collectors.toList());
     }
+
+    public void buyOffer(Long offerId, Long ownerId) {
+        Offer offerToBuy = this.offerRepository.findById(offerId).get();
+        offerToBuy.setOwner(null);
+
+        User user = this.userRepository.findById(ownerId).get();
+        user.getBoughtOffers().add(offerToBuy);
+
+        this.offerRepository.save(offerToBuy);
+        this.userRepository.save(user);
+    }
+
+
 }

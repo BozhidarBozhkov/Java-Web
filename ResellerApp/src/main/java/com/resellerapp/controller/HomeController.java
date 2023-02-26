@@ -1,10 +1,12 @@
 package com.resellerapp.controller;
 
+import com.resellerapp.model.dto.BoughtItemsDTO;
 import com.resellerapp.model.dto.OtherUserOfferDto;
 import com.resellerapp.model.dto.UserRegistrationDTO;
 import com.resellerapp.model.dto.UserWithOfferDTO;
 import com.resellerapp.service.AuthService;
 import com.resellerapp.service.OfferService;
+import com.resellerapp.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +22,12 @@ import java.util.List;
 public class HomeController {
     private final AuthService authService;
     private final OfferService offerService;
+    private final UserService userService;
 
-    public HomeController(AuthService authService, OfferService offerService) {
+    public HomeController(AuthService authService, OfferService offerService, UserService userService) {
         this.authService = authService;
         this.offerService = offerService;
+        this.userService = userService;
     }
 
     @GetMapping("/register")
@@ -56,9 +60,12 @@ public class HomeController {
 
         List<UserWithOfferDTO> userWithOfferList = this.offerService.userWithOfferDTOList();
         List<OtherUserOfferDto> otherUserOfferList = this.offerService.otherUserOfferDtoList();
+        List<BoughtItemsDTO> boughtItemsDTOList = this.userService.boughtItemsDTOList();
 
         model.addAttribute("userWithOffers", userWithOfferList);
         model.addAttribute("otherUserOffers", otherUserOfferList);
+        model.addAttribute("boughtItems", boughtItemsDTOList);
+
         return "home";
     }
 

@@ -1,9 +1,6 @@
 package com.resellerapp.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -21,7 +18,7 @@ public class User extends BaseEntity{
     @OneToMany
     private List<Offer> offers;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Offer> boughtOffers;
 
     public User() {
