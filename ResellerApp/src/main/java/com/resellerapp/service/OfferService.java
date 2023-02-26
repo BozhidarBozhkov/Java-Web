@@ -1,6 +1,8 @@
 package com.resellerapp.service;
 
 import com.resellerapp.model.dto.AddOfferDTO;
+import com.resellerapp.model.dto.OtherUserOfferDto;
+import com.resellerapp.model.dto.UserWithOfferDTO;
 import com.resellerapp.model.entity.Condition;
 import com.resellerapp.model.entity.ConditionType;
 import com.resellerapp.model.entity.Offer;
@@ -11,7 +13,9 @@ import com.resellerapp.repository.OfferRepository;
 import com.resellerapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
@@ -43,5 +47,15 @@ public class OfferService {
 
         this.offerRepository.save(offer);
 
+    }
+
+    public List<UserWithOfferDTO> userWithOfferDTOList() {
+        return this.offerRepository.findAllByOwnerId(loggedUser.getId())
+                .stream().map(UserWithOfferDTO::new).collect(Collectors.toList());
+    }
+
+    public List<OtherUserOfferDto> otherUserOfferDtoList() {
+        return this.offerRepository.findAllByOwnerIdNot(loggedUser.getId())
+                .stream().map(OtherUserOfferDto::new).collect(Collectors.toList());
     }
 }
