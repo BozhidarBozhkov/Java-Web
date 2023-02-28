@@ -33,7 +33,7 @@
                     <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
                         <table class="table table-striped table-dark">
                             <tr th:each="offer : ${boughtItems}"
-                            th:object="${offer}">
+                            >
                                 <td class="bg-info" scope="row" style="width: 5%">
                                     <img class="mr-2 " src="/img/etiquette.png" alt="Etiquette" width="35px"
                                          height="35px">
@@ -80,7 +80,7 @@
                                                 <a th:text="${otherOffer.getPrice()}">Price: {offerPrice} €</a>
                                             </td>
                                             <td>
-                                                <a class="ml-3 text-danger" th:href="@{offer/buy/{id}(id= *{id})}">
+                                                <a class="ml-3 text-danger" th:href="@{offer/buy/{id}(id= *{otherOffer.getId()})}">
                                                     <img src="/img/buy.png" height="35px"></a>
                                             </td>
                                         </tr>
