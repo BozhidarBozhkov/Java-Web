@@ -60,4 +60,11 @@ public class OfferController {
 
         return "redirect:/home";
     }
+
+    @GetMapping("/offer/remove/{id}")
+    public String removeOffer(@PathVariable Long id) {
+        offerService.removeOffer(id);
+
+        return "redirect:/home";
+    }
 }

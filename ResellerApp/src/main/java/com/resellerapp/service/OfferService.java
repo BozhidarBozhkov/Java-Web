@@ -65,11 +65,15 @@ public class OfferService {
         offerToBuy.setOwner(null);
 
         User user = this.userRepository.findById(ownerId).get();
+        offerToBuy.setOwner(user);
         user.getBoughtOffers().add(offerToBuy);
 
         this.offerRepository.save(offerToBuy);
         this.userRepository.save(user);
     }
 
+    public void removeOffer(Long offerId) {
+        this.offerRepository.deleteById(offerId);
+    }
 
 }
